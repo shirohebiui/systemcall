@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 		lock.l_start=(id-START_ID)*sizeof(record);
 		lock.l_len=sizeof(record);
 		if(fcntl(fd,F_SETLKW,&lock)==-1)
-		/*읽기 잠금*/
+		/*쓰기 잠금*/
 		{
 			perror(argv[1]);
 			exit(3);

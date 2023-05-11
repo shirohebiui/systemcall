@@ -6,6 +6,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include <time.h>
+#include <string.h>
 
 /* 디렉터리 내용을 자세히  리스트한다. */
 
@@ -50,7 +51,7 @@ void printStat(char *pathname, char *file, struct stat *st)
 	printf("%3hu ", st->st_nlink); //링크수
 	printf("%s %s ",getpwuid(st->st_uid)->pw_name, getgrgid(st->st_gid)->gr_name);
 	//getpwuid(ID): ID와 일치하는 엔트리를 /etc/passwd 파일에서 찾아서 그 엔트리에 대한 포인터 반환
-	//pw_nmae 필드가 사용자 이름을 가지고있다. getgrgid도 비슷하게 동작
+//pw_nmae 필드가 사용자 이름을 가지고있다. getgrgid도 비슷하게 동작
 	printf("%9lld ", st->st_size); //파일 크기
 	printf("%.12s ", ctime(&st->st_mtime)+4);
 	//ctime : 시간형식 문자열 반환
@@ -81,25 +82,16 @@ char type(mode_t mode)
 char* perm(mode_t mode)
 {
 	int i;
-	static char perms[10]="---------";
+	static char perms[10];
+	strcpy(perms, "---------");
 	for(i=0;i<3;i++)
 	{
 		if(mode & (S_IREAD>>i*3)) //S_IREAD : 400(8) = 100 000 000(2)
 			perms[i*3]='r';
-		else
-
-			perms[i*3]='-';
 		if(mode & (S_IWRITE>>i*3)) //S_IWRITE : 200(8) = 010 000 000(2)
 			perms[i*3+1]='w';
-		else
-
-			perms[i*3+1]='-';
 		if(mode & (S_IEXEC>>i*3))//S_IEXEC : 100(8) = 001 000 000(2)
 			perms[i*3+2]='x';
-		else
-
-			perms[i*3+2]='-';
-	}
-	
+	}	
 	return(perms);
 }
