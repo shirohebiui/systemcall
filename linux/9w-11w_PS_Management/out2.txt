@@ -1,0 +1,4 @@
+2023년 5월 12일 금요일 13시 37분 00초 KST
+kms      console  Apr 23 00:49 
+kms      ttys000  May 12 07:49 
+/Users/kms/Univ/linux/10w_psmanage
