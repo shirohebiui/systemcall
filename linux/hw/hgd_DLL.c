@@ -66,11 +66,14 @@ double_node *Insert_double_node_in_order_of_size(int k)
 {
 	double_node *s;
 	double_node *i;
+
+	s = (double_node*)malloc(sizeof(double_node));
+	i = (double_node*)malloc(sizeof(double_node));
 	if(head->next == tail)
 	{
 		i->key = k;
-		i->prev = head;
-		i->next = tail;
+		i->prev = head->prev;
+		i->next = tail->next;
 		head->next = i;
 		tail->prev = i;
 	}
@@ -79,7 +82,7 @@ double_node *Insert_double_node_in_order_of_size(int k)
 		s=head->next;
 		while(s != tail)
 		{
-			if( k < s->key || (s == tail) )
+			if( (k < s->key) || (s == tail) )
 			{
 				i->key = k;
 				i->prev = s->prev;
