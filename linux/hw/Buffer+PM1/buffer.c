@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	else
 		printf("완전 버퍼 사용");
 
-	printf(", 버퍼 크기 = %ld\n", fp->_IO_buf_end - fp->_IO_buf_base);
+	printf(", 버퍼 크기 = %l\n", fp->_IO_buf_end - fp->_IO_buf_base);
 	exit(0);
 }
 

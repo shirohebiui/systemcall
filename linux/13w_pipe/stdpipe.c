@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#define MAXLINE 100
+
+/* pipe를 통해 child ps excute cmd output을 받아 print */
+
+int main(int argc, char* argv[])
+{
+	int n, pid, fd[2];
+	char line[MAXLINE];
+	pipe(fd); /* create pipe */
+
+	if((pid=fork())==0)
+	{
+		close(fd[0]);
+		dup2(fd[1], 1);
+		close(fd[1]);
+		printf("Hello! pipe\n");
+		printf("Bye! pipe\n");
+	} else {
+		close(fd[1]);
+		printf("자식 프로세스로부터 받은 결과\n");
+		while((n=read(fd[0], line, MAXLINE))>0)
+				write(STDOUT_FILENO, line, n);
+		while(1);
+	}
+
+	exit(0);
+}

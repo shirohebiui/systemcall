@@ -1,0 +1,5 @@
+echo 123
+kms      console  Apr 23 00:49 
+kms      ttys000  Apr 27 21:43 
+kms      ttys001  Apr 23 00:49 
+kms      ttys002  Apr 27 22:06 
